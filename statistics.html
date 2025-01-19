@@ -120,8 +120,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const femaleDetails = getCookie('submit_female_details') ? JSON.parse(getCookie('submit_female_details')) : null;
-            const maleDetails = getCookie('submit_male_details') ? JSON.parse(getCookie('submit_male_details')) : null;
+            const femaleCookie = getCookie('submit_female_details');
+            const maleCookie = getCookie('submit_male_details');
+            const femaleDetails = femaleCookie ? JSON.parse(femaleCookie) : null;
+            const maleDetails = maleCookie ? JSON.parse(maleCookie) : null;
             const initialDetails = femaleDetails || maleDetails;
             const currentDetails = JSON.parse(localStorage.getItem('currentWorkoutDetails')) || initialDetails;
             const oldDetails = JSON.parse(localStorage.getItem('oldWorkoutDetails')) || initialDetails;
