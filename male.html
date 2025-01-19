@@ -123,29 +123,29 @@
     <footer>
         <p>&copy; 2025 Anthony's Workout</p>
     </footer>
- <script>
-    document.getElementById('maleDetailsForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const name = document.getElementById('name').value;
-        const age = document.getElementById('age').value;
-        const weight = document.getElementById('weight').value;
-        const height = document.getElementById('height').value;
-        const trainingDuration = document.getElementById('trainingDuration').value;
-        const goal = document.getElementById('goal').value;
+    <script>
+        document.getElementById('detailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value;
+            const trainingDuration = document.getElementById('training_duration').value;
+            const goal = document.getElementById('goal').value;
 
-        const maleDetails = {
-            name,
-            age,
-            weight,
-            height,
-            training_duration: trainingDuration,
-            goal
-        };
+            const maleDetails = {
+                name,
+                age,
+                weight,
+                height,
+                training_duration: trainingDuration,
+                goal
+            };
 
-        setCookie('submit_male_details', JSON.stringify(maleDetails), 365);
-        alert('Details submitted successfully!');
-        window.location.href = 'statistics.html';
-    });
-</script>
+            localStorage.setItem('initialWorkoutDetails', JSON.stringify(maleDetails));
+            alert('Details submitted successfully!');
+            window.location.href = 'statistics.html';
+        });
+    </script>
 </body>
 </html>
