@@ -119,19 +119,14 @@
             document.cookie = name + "=" + value + ";" + expires + ";path=/";
         }
 
-        function saveInitialDetails(details) {
-            setCookie('initialWorkoutDetails', JSON.stringify(details), 365);
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
             const femaleDetails = getCookie('submit_female_details') ? JSON.parse(getCookie('submit_female_details')) : null;
             const maleDetails = getCookie('submit_male_details') ? JSON.parse(getCookie('submit_male_details')) : null;
-            const initialDetails = JSON.parse(getCookie('initialWorkoutDetails')) || femaleDetails || maleDetails;
+            const initialDetails = femaleDetails || maleDetails;
             const currentDetails = JSON.parse(localStorage.getItem('currentWorkoutDetails')) || initialDetails;
             const oldDetails = JSON.parse(localStorage.getItem('oldWorkoutDetails')) || initialDetails;
 
             if (initialDetails) {
-                saveInitialDetails(initialDetails);
                 const detailsDiv = document.getElementById('initialDetails');
                 detailsDiv.innerHTML = `
                     <p><strong>Name:</strong> ${initialDetails.name}</p>
@@ -216,15 +211,11 @@
             // Function to submit male details and set cookie
             function submitMaleDetails(details) {
                 setCookie('submit_male_details', JSON.stringify(details), 7);
-                saveInitialDetails(details); // Save as initial details
-                window.location.reload();
             }
 
             // Function to submit female details and set cookie
             function submitFemaleDetails(details) {
                 setCookie('submit_female_details', JSON.stringify(details), 7);
-                saveInitialDetails(details); // Save as initial details
-                window.location.reload();
             }
         });
     </script>
