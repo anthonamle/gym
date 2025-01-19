@@ -123,21 +123,29 @@
     <footer>
         <p>&copy; 2025 Anthony's Workout</p>
     </footer>
-    <script>
-        document.getElementById('detailsForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const age = document.getElementById('age').value;
-            const weight = document.getElementById('weight').value;
-            const height = document.getElementById('height').value;
-            const training_duration = document.getElementById('training_duration').value;
-            const goal = document.getElementById('goal').value;
+ <script>
+    document.getElementById('maleDetailsForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        const weight = document.getElementById('weight').value;
+        const height = document.getElementById('height').value;
+        const trainingDuration = document.getElementById('trainingDuration').value;
+        const goal = document.getElementById('goal').value;
 
-            const initialDetails = { name, age, weight, height, training_duration, goal };
-            localStorage.setItem('initialWorkoutDetails', JSON.stringify(initialDetails));
-            alert('Details submitted and saved as initial information!');
-            window.location.href = 'statistics.html';
-        });
-    </script>
+        const maleDetails = {
+            name,
+            age,
+            weight,
+            height,
+            training_duration: trainingDuration,
+            goal
+        };
+
+        setCookie('submit_male_details', JSON.stringify(maleDetails), 365);
+        alert('Details submitted successfully!');
+        window.location.href = 'statistics.html';
+    });
+</script>
 </body>
 </html>
