@@ -122,9 +122,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const femaleCookie = getCookie('submit_female_details');
             const maleCookie = getCookie('submit_male_details');
-            const femaleDetails = femaleCookie ? JSON.parse(femaleCookie) : null;
-            const maleDetails = maleCookie ? JSON.parse(maleCookie) : null;
-            const initialDetails = femaleDetails || maleDetails;
+            const initialDetails = JSON.parse(localStorage.getItem('initialWorkoutDetails')) || null;
             const currentDetails = JSON.parse(localStorage.getItem('currentWorkoutDetails')) || initialDetails;
             const oldDetails = JSON.parse(localStorage.getItem('oldWorkoutDetails')) || initialDetails;
 
