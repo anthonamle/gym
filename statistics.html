@@ -112,6 +112,13 @@
             return "";
         }
 
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days*24*60*60*1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const femaleDetails = getCookie('submit_female_details') ? JSON.parse(getCookie('submit_female_details')) : null;
             const maleDetails = getCookie('submit_male_details') ? JSON.parse(getCookie('submit_male_details')) : null;
@@ -178,6 +185,10 @@
                 const updatedDetails = { ...currentDetails, age: newAge, weight: newWeight, height: newHeight, training_duration: newTrainingDuration };
                 localStorage.setItem('oldWorkoutDetails', JSON.stringify(currentDetails));
                 localStorage.setItem('currentWorkoutDetails', JSON.stringify(updatedDetails));
+                
+                // Set the updated details in cookies
+                setCookie('currentWorkoutDetails', JSON.stringify(updatedDetails), 7);
+
                 alert('Details updated successfully!');
                 window.location.reload();
             });
