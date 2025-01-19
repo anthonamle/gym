@@ -192,6 +192,16 @@
                 alert('Details updated successfully!');
                 window.location.reload();
             });
+
+            // Function to submit male details and set cookie
+            function submitMaleDetails(details) {
+                setCookie('submit_male_details', JSON.stringify(details), 7);
+            }
+
+            // Function to submit female details and set cookie
+            function submitFemaleDetails(details) {
+                setCookie('submit_female_details', JSON.stringify(details), 7);
+            }
         });
     </script>
 </body>
