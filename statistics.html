@@ -148,19 +148,34 @@
                         {
                             label: 'Initial Details',
                             borderColor: 'red',
-                            data: [initialDetails.age, initialDetails.weight, initialDetails.height, initialDetails.training_duration],
+                            data: [
+                                initialDetails ? initialDetails.age : 0,
+                                initialDetails ? initialDetails.weight : 0,
+                                initialDetails ? initialDetails.height : 0,
+                                initialDetails ? initialDetails.training_duration : 0
+                            ],
                             fill: false
                         },
                         {
                             label: 'Current Details',
                             borderColor: 'cyan',
-                            data: [currentDetails.age, currentDetails.weight, currentDetails.height, currentDetails.training_duration],
+                            data: [
+                                currentDetails ? currentDetails.age : 0,
+                                currentDetails ? currentDetails.weight : 0,
+                                currentDetails ? currentDetails.height : 0,
+                                currentDetails ? currentDetails.training_duration : 0
+                            ],
                             fill: false
                         },
                         {
                             label: 'Old Details',
                             borderColor: 'purple',
-                            data: [oldDetails.age, oldDetails.weight, oldDetails.height, oldDetails.training_duration],
+                            data: [
+                                oldDetails ? oldDetails.age : 0,
+                                oldDetails ? oldDetails.weight : 0,
+                                oldDetails ? oldDetails.height : 0,
+                                oldDetails ? oldDetails.training_duration : 0
+                            ],
                             fill: false
                         }
                     ]
@@ -202,11 +217,6 @@
             function submitFemaleDetails(details) {
                 setCookie('submit_female_details', JSON.stringify(details), 7);
             }
-
-            // Example usage of submitMaleDetails and submitFemaleDetails
-            // Replace the following lines with actual form submissions or button clicks
-            // submitMaleDetails({ name: "John", age: 30, weight: 80, height: 180, training_duration: 3, goal: "Build muscle" });
-            // submitFemaleDetails({ name: "Jane", age: 25, weight: 60, height: 170, training_duration: 2, goal: "Lose weight" });
         });
     </script>
 </body>
