@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthony's Workout</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #1a1a1a; /* Slightly lighter background */
+            color: #ffffff; /* Brighter text color */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/home.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(50%);
+            z-index: -1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        header {
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter header background */
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #6a0dad; /* Brighter border color */
+        }
+
+        h1, h2 {
+            color: #ffffff; /* Brighter heading color */
+        }
+
+        nav a {
+            color: #ffffff; /* Brighter link color */
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffccff; /* Brighter hover color */
+        }
+
+        main {
+            padding: 40px;
+            font-size: 1em;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(31, 31, 31, 0.8);
+            border-radius: 10px;
+        }
+
+        a {
+            color: #4b0082;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #d1a6d1;
+        }
+
+        footer {
+            background-color: rgba(31, 31, 31, 0.8);
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid #4b0082;
+            font-size: 0.8em;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #4b0082;
+            color: #ffffff; /* Brighter button text */
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #4b0082;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #d1a6d1;
+            color: #1a1a1a; /* Darker hover text */
+        }
+
+        .gender-selection {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .gender-button {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 10px;
+            background-color: #1f1f1f;
+            color: #ffffff; /* Brighter button text */
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #4b0082;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .gender-button:hover {
+            background-color: #4b0082;
+            color: #1a1a1a; /* Darker hover text */
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="overlay"></div>
+    <header>
+        <h1>Welcome to Anthony's Workout</h1>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="terms.html">Terms</a> |
+            <a href="planner.html">Workout Planner</a> |
+            <a href="statistics.html">Statistics</a> |
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        <h2>General Overview</h2>
+        <p>Welcome to Anthony's Planner. Here, we focus on your main fitness goals using the latest studies and science-backed workouts to ensure you get the best results in the shortest time possible. Join us and transform your fitness journey with proven methods and expert guidance.</p>
+        
+        <h2>Please Choose Your Gender to Begin With</h2>
+        <div class="gender-selection">
+            <a href="male.html" class="gender-button">Male</a>
+            <a href="female.html" class="gender-button">Female</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Anthony's Workout</p>
+    </footer>
+</body>
+</html>

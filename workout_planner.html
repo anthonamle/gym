@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Planner</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #ffffff; /* Brighter text color */
+            background-image: url('images/body.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(70%);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        header {
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter header background */
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #6a0dad; /* Brighter border color */
+        }
+
+        h1, h2, h3 {
+            color: #ffffff; /* Brighter heading color */
+        }
+
+        nav a {
+            color: #ffffff; /* Brighter link color */
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffccff; /* Brighter hover color */
+        }
+
+        main {
+            padding: 40px;
+            font-size: 1em;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter main background */
+            border-radius: 10px;
+        }
+
+        a {
+            color: #6a0dad; /* Brighter link color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffccff; /* Brighter hover color */
+        }
+
+        footer {
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter footer background */
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid #6a0dad; /* Brighter border color */
+            font-size: 0.8em;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #6a0dad; /* Brighter button background */
+            color: #ffffff; /* Brighter button text */
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #6a0dad; /* Brighter button border */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #ffccff; /* Brighter hover background */
+            color: #1a1a1a; /* Darker hover text */
+        }
+
+        .day {
+            margin-bottom: 20px;
+            background-color: #444444; /* Lighter day background */
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #6a0dad; /* Brighter border color */
+        }
+
+        .day label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffffff; /* Brighter label color */
+        }
+
+        .day select, .day input[type="text"], .day textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #444444; /* Lighter input background */
+            color: #ffffff; /* Brighter input text */
+        }
+
+        .day textarea {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <header>
+        <h1>Workout Planner</h1>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="terms.html">Terms</a> |
+            <a href="planner.html">Workout Planner</a> |
+            <a href="statistics.html">Statistics</a> |
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Choose Your Workout Plan</h2>
+        <form id="workoutForm">
+            <label for="plan">Select a workout plan:</label>
+            <select id="plan" name="plan" required>
+                <option value="push_pull_legs">Push Pull Legs</option>
+                <option value="upper_lower">Upper Lower</option>
+                <option value="full_body">Full Body</option>
+                <option value="customize">Customize Your Own</option>
+            </select><br><br>
+            <input type="button" class="button" value="Next" onclick="redirectToPlanner()">
+        </form>
+        <section id="recommendations">
+            <h3>Workout Plan Recommendations</h3>
+            <p><strong>Full Body Workout:</strong> Ideal for beginners and those with limited time. It allows for frequent training of each muscle group, promoting muscle synthesis and growth.</p>
+            <p><strong>Push Pull Legs Workout:</strong> Great for intermediate lifters. It provides a balanced approach, allowing for adequate recovery and targeting different muscle groups on different days.</p>
+            <p><strong>Upper Lower Workout:</strong> Suitable for those looking to train four times a week. It offers a good balance between training frequency and recovery, promoting muscle growth and strength.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Anthony's Workout</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedPlan = localStorage.getItem('selectedPlan');
+            if (savedPlan) {
+                document.getElementById('plan').value = savedPlan;
+            }
+        });
+
+        function redirectToPlanner() {
+            const plan = document.getElementById('plan').value;
+            localStorage.setItem('selectedPlan', plan);
+            window.location.href = `planner.html?plan=${plan}`;
+        }
+    </script>
+</body>
+</html>

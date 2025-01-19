@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Details</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #ffffff; /* Brighter text color */
+            background-image: url('images/body.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(70%);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        header {
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter header background */
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #6a0dad; /* Brighter border color */
+        }
+
+        h1 {
+            color: #ffffff; /* Brighter heading color */
+        }
+
+        main {
+            padding: 40px;
+            font-size: 1em;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter main background */
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #ffffff; /* Brighter label color */
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #444444; /* Lighter input background */
+            color: #ffffff; /* Brighter input text */
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #6a0dad; /* Brighter button background */
+            color: #ffffff; /* Brighter button text */
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #6a0dad; /* Brighter button border */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #ffccff; /* Brighter hover background */
+            color: #1a1a1a; /* Darker hover text */
+        }
+
+        footer {
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter footer background */
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <header>
+        <h1>Enter Your Details</h1>
+    </header>
+    <main>
+        <form id="detailsForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" step="0.1" required><br>
+            <label for="weight">Body Weight (kg):</label>
+            <input type="number" id="weight" name="weight" step="0.1" required><br>
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" step="0.1" required><br>
+            <label for="training_duration">How long have you been training (years):</label>
+            <input type="number" id="training_duration" name="training_duration" step="0.1" required><br>
+            <label for="goal">Goal:</label>
+            <select id="goal" name="goal" required>
+                <option value="bulk">Bulk</option>
+                <option value="cut">Cut</option>
+            </select><br>
+            <input type="submit" class="button" value="Submit">
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 Anthony's Workout</p>
+    </footer>
+    <script>
+        document.getElementById('detailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value;
+            const training_duration = document.getElementById('training_duration').value;
+            const goal = document.getElementById('goal').value;
+
+            const initialDetails = { name, age, weight, height, training_duration, goal };
+            localStorage.setItem('initialWorkoutDetails', JSON.stringify(initialDetails));
+            alert('Details submitted and saved as initial information!');
+            window.location.href = 'statistics.html';
+        });
+    </script>
+</body>
+</html>

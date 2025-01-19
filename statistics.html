@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            background: url('images/body.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: brightness(50%) contrast(80%);
+            z-index: -1;
+        }
+        .details-container {
+            background-color: rgba(50, 50, 50, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Roboto', sans-serif;
+        }
+        .details-container p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #cccccc; /* Darker text color */
+        }
+        .details-container strong {
+            color: #ffccff;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .details-container h3 {
+            margin-top: 0;
+            color: #ffccff;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Statistics</h1>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="terms.html">Terms</a> |
+            <a href="planner.html">Workout Planner</a> |
+            <a href="statistics.html">Statistics</a> |
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Goal: <span id="goal"></span></h2>
+        <div id="initialDetails" class="details-container">
+            <h3>Starting Point</h3>
+        </div>
+        <h2>Update Your Details</h2>
+        <form id="updateDetailsForm">
+            <div class="form-group">
+                <label for="newAge">Age:</label>
+                <input type="number" id="newAge" name="newAge" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="newWeight">Body Weight (kg):</label>
+                <input type="number" id="newWeight" name="newWeight" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="newHeight">Height (cm):</label>
+                <input type="number" id="newHeight" name="newHeight" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="newTrainingDuration">How long have you been training (years):</label>
+                <input type="number" id="newTrainingDuration" name="newTrainingDuration" step="0.1" required>
+            </div>
+            <input type="submit" class="button" value="Update Details">
+        </form>
+        <canvas id="detailsChart" width="400" height="200"></canvas>
+    </main>
+    <footer>
+        <p>&copy; 2025 Anthony's Workout</p>
+    </footer>
+    <script>
+        function getCookie(name) {
+            const cname = name + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(cname) === 0) {
+                    return c.substring(cname.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const femaleDetails = getCookie('submit_female_details') ? JSON.parse(getCookie('submit_female_details')) : null;
+            const maleDetails = getCookie('submit_male_details') ? JSON.parse(getCookie('submit_male_details')) : null;
+            const initialDetails = femaleDetails || maleDetails;
+            const currentDetails = JSON.parse(localStorage.getItem('currentWorkoutDetails')) || initialDetails;
+            const oldDetails = JSON.parse(localStorage.getItem('oldWorkoutDetails')) || initialDetails;
+
+            if (initialDetails) {
+                const detailsDiv = document.getElementById('initialDetails');
+                detailsDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${initialDetails.name}</p>
+                    <p><strong>Age:</strong> ${initialDetails.age}</p>
+                    <p><strong>Weight:</strong> ${initialDetails.weight} kg</p>
+                    <p><strong>Height:</strong> ${initialDetails.height} cm</p>
+                    <p><strong>Training Duration:</strong> ${initialDetails.training_duration} years</p>
+                    <p><strong>Goal:</strong> ${initialDetails.goal}</p>
+                `;
+                document.getElementById('goal').textContent = initialDetails.goal;
+            }
+
+            const ctx = document.getElementById('detailsChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Age', 'Weight', 'Height', 'Training Duration'],
+                    datasets: [
+                        {
+                            label: 'Initial Details',
+                            borderColor: 'red',
+                            data: [initialDetails.age, initialDetails.weight, initialDetails.height, initialDetails.training_duration],
+                            fill: false
+                        },
+                        {
+                            label: 'Current Details',
+                            borderColor: 'cyan',
+                            data: [currentDetails.age, currentDetails.weight, currentDetails.height, currentDetails.training_duration],
+                            fill: false
+                        },
+                        {
+                            label: 'Old Details',
+                            borderColor: 'purple',
+                            data: [oldDetails.age, oldDetails.weight, oldDetails.height, oldDetails.training_duration],
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('updateDetailsForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const newAge = document.getElementById('newAge').value;
+                const newWeight = document.getElementById('newWeight').value;
+                const newHeight = document.getElementById('newHeight').value;
+                const newTrainingDuration = document.getElementById('newTrainingDuration').value;
+
+                const updatedDetails = { ...currentDetails, age: newAge, weight: newWeight, height: newHeight, training_duration: newTrainingDuration };
+                localStorage.setItem('oldWorkoutDetails', JSON.stringify(currentDetails));
+                localStorage.setItem('currentWorkoutDetails', JSON.stringify(updatedDetails));
+                alert('Details updated successfully!');
+                window.location.reload();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Submitted</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #1a1a1a; /* Slightly lighter background */
+            color: #ffffff; /* Brighter text color */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgba(50, 50, 50, 0.9); /* Lighter header background */
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #6a0dad; /* Brighter border color */
+        }
+
+        h1, h2 {
+            color: #ffffff; /* Brighter heading color */
+        }
+
+        main {
+            padding: 40px;
+            font-size: 1em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #444444;
+            color: #ffffff;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #6a0dad; /* Brighter button background */
+            color: #ffffff; /* Brighter button text */
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #6a0dad; /* Brighter button border */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #ffccff; /* Brighter hover background */
+            color: #1a1a1a; /* Darker hover text */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Submit Female Details</h1>
+    </header>
+    <main>
+        <form id="femaleDetailsForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Body Weight (kg):</label>
+                <input type="number" id="weight" name="weight" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="trainingDuration">How long have you been training (years):</label>
+                <input type="number" id="trainingDuration" name="trainingDuration" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="goal">Goal (cut/bulk):</label>
+                <input type="text" id="goal" name="goal" required>
+            </div>
+            <input type="submit" class="button" value="Submit">
+        </form>
+    </main>
+    <script>
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        document.getElementById('femaleDetailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value;
+            const trainingDuration = document.getElementById('trainingDuration').value;
+            const goal = document.getElementById('goal').value;
+
+            const femaleDetails = {
+                name,
+                age,
+                weight,
+                height,
+                training_duration: trainingDuration,
+                goal
+            };
+
+            setCookie('submit_female_details', JSON.stringify(femaleDetails), 365);
+            alert('Details submitted successfully!');
+            window.location.href = 'statistics.html';
+        });
+    </script>
+</body>
+</html>
